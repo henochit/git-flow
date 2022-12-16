@@ -22,15 +22,14 @@ const cleanupPosts = (posts) => {
   // Do some cleanup; remove UserID from post since it's not really needed
   return posts.map((post) => {
     delete post["userId"];
+    delete post["password"];
     return post;
   });
 };
 
 const getPostWrapper = async () => {
-  let result = await fetchPosts(1);
-  result = [];
-  
-  return result;
+  const posts = await fetchPosts(1);
+  return cleanupPosts(posts);
 };
 
 export default getPostWrapper;
